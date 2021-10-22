@@ -19,6 +19,7 @@ import keyboard
 
     
 def PWGeneratorWin():
+    root.destroy()
     PWGWin = tk.Tk()
     PWGWin.title ("Password Generator")
     PWGWin.resizable(0,0)
@@ -64,6 +65,7 @@ def PWGeneratorWin():
     
     
 def CRCalendar():
+    root.destroy()
     
     newfile = tk.Tk()
     newfile.resizable(0,0)
@@ -89,6 +91,7 @@ def CRCalendar():
     newfile.mainloop()
 
 def Notepad():
+    root.destroy()
     
     def open_file():
         filetypes = (
@@ -113,13 +116,14 @@ def Notepad():
             ("Text Files","*.txt"),
             ("All Files","*.*")
         )
-        fo = f.asksaveasfile(filetypes=filetypes)
+        fo = f.asksaveasfile(mode="w",defaultextension="txt",filetype=filetypes)
         
-        if not fo:
+        if fo is None:
             return 
         
-        fs = open(fo, "w")
-        fs.write(txt_edit.get(1.0 , tk.END))
+        text2save = str(txt_edit.get(1.0 , tk.END))
+        fo.write(text2save)
+        fo.close()
         NPWin.title(f"M0nst3r Notepad - {fo}")
     
     NPWin = tk.Tk()
